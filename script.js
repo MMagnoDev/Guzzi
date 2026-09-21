@@ -11,12 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (typeof Lenis !== 'undefined') {
     lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      touchMultiplier: 1.5,
+      touchMultiplier: 1.0,
       infinite: false,
     });
 
@@ -28,37 +28,38 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 2. PARALLAX EFFECTS — HERO (background-position) + ABOUT IMAGE (transform)
+  // 2. PARALLAX EFFECTS — GPU-ACCELERATED HERO & ABOUT SECTION
   // --------------------------------------------------------------------------
   const heroParallax = document.getElementById('heroParallax');
   const heroSection  = document.getElementById('hero');
   const aboutImg     = document.querySelector('.about-split-img');
   const aboutSection = document.getElementById('about');
 
-  // Use a subtle speed; background-position parallax on mobile is very smooth
-  const HERO_PARALLAX_SPEED = 0.22;
-
   function updateHeroParallax(scrollY) {
     if (!heroParallax || !heroSection) return;
-    if (scrollY > heroSection.offsetHeight * 1.5) return;
-    // Shift the background upward (smaller % = higher up) as page scrolls
-    // We only animate Y; X stays fixed per breakpoint CSS
-    const pct = Math.max(0, 18 - scrollY * 0.018);
-    heroParallax.style.backgroundPositionY = `${pct.toFixed(2)}%`;
+    const heroHeight = heroSection.offsetHeight;
+    if (scrollY > heroHeight * 1.3) return;
+    // GPU translation: 0 at top of page, moving smoothly at ~0.25x scroll
+    const y = scrollY * 0.25;
+    heroParallax.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
   }
 
-  function updateAboutParallax(scrollY) {
+  function updateAboutParallax() {
     if (!aboutImg || !aboutSection) return;
     const rect = aboutSection.getBoundingClientRect();
     const vh   = window.innerHeight;
-    if (rect.bottom < -100 || rect.top > vh + 100) return;
-    const progress = (vh / 2) - (rect.top + rect.height / 2);
-    aboutImg.style.transform = `translate3d(0, ${(progress * 0.15).toFixed(2)}px, 0) scale(1.04)`;
+    // Only calculate when about section is in or near the viewport
+    if (rect.bottom < -60 || rect.top > vh + 60) return;
+    // Relative position: 0 when centered in viewport
+    const centerOffset = (vh / 2) - (rect.top + rect.height / 2);
+    // Smooth, clamped parallax range (±45px)
+    const y = Math.max(-45, Math.min(45, centerOffset * 0.12));
+    aboutImg.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
   }
 
   function onScroll(scrollY) {
     updateHeroParallax(scrollY);
-    updateAboutParallax(scrollY);
+    updateAboutParallax();
   }
 
   if (lenis) {
