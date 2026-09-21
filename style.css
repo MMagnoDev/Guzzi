@@ -1,0 +1,1453 @@
+/* ==========================================================================
+   GUZZI COLLECTION — APRESENTAÇÃO DA MARCA (MODA FITNESS & ATHLEISURE)
+   100% Minimalist Sans-Serif Typography & Luxury Spatial Rhythm
+   Lenis Smooth Scroll + Parallax Hero + Reveal on Scroll
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DESIGN TOKENS & RESET
+   -------------------------------------------------------------------------- */
+:root {
+  /* Minimalist Sans-Serif Typographic System */
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Specific Earth / Fitness Neutral Palette Requested */
+  --color-sand: #CEBEAF;   /* R206 G190 B175 Warm Sand / Oat Beige */
+  --color-sage: #696758;   /* R105 G103 B88 Olive Sage / Moss Grey */
+  --color-mocha: #674833;  /* R103 G72 B51 Deep Chocolate Brown */
+
+  /* Neutral Surface Palette */
+  --color-black: #0c0c0c;
+  --color-black-deep: #070707;
+  --color-dark-surface: #141414;
+  --color-white: #ffffff;
+  --color-cream-bg: #f8f8f6;
+  --color-cream-card: #f2f2ee;
+  
+  --color-text-main: #141414;
+  --color-text-muted: #5e5e5e;
+  --color-text-subtle: #8a8a8a;
+  --color-text-hero-tag: rgba(255, 255, 255, 0.75);
+  --color-border-light: rgba(0, 0, 0, 0.08);
+  --color-border-dark: rgba(255, 255, 255, 0.14);
+
+  /* Spacing Scale (strict 4px / 8px system) */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-120: 120px;
+  --space-140: 140px;
+
+  /* Container Boundaries */
+  --container-max-width: 1280px;
+  --container-pad-desktop: 48px;
+  --container-pad-tablet: 32px;
+  --container-pad-mobile: 20px;
+
+  /* Easing & Motions */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: all 0.4s var(--ease-editorial);
+  --transition-fast: all 0.25s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Lenis Smooth Scroll Integration */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+html {
+  font-size: 17px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream-bg);
+  color: var(--color-text-main);
+  line-height: 1.50;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+/* --------------------------------------------------------------------------
+   2. BUTTON SYSTEM — PILL BUTTONS & EDITORIAL LINKS
+   -------------------------------------------------------------------------- */
+
+/* Premium Pill Button — the primary CTA style */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-12);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  padding: 14px 26px;
+  border-radius: 8px;
+  border: 1.5px solid transparent;
+  transition: background 0.35s var(--ease-editorial), color 0.35s var(--ease-editorial), border-color 0.35s var(--ease-editorial), box-shadow 0.35s var(--ease-editorial), transform 0.25s var(--ease-editorial);
+  width: fit-content;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  /* Prevent parent color cascade from overriding button text */
+  color: inherit;
+}
+
+.btn-pill .arrow-icon {
+  transition: transform 0.35s var(--ease-editorial);
+  flex-shrink: 0;
+}
+
+.btn-pill:hover .arrow-icon {
+  transform: translateX(5px);
+}
+
+/* Hero CTA: solid white fill — text forced to near-black for contrast */
+.hero-cta {
+  background: #ffffff;
+  color: #111111 !important;
+  border-color: #ffffff;
+}
+
+.hero-cta span,
+.hero-cta svg,
+.hero-cta path {
+  color: #111111;
+  stroke: #111111;
+}
+
+.hero-cta:hover {
+  background: var(--color-sand);
+  color: #111111 !important;
+  border-color: var(--color-sand);
+  box-shadow: 0 8px 24px rgba(206, 190, 175, 0.40);
+  transform: translateY(-2px);
+}
+
+/* About CTA: readable on dark surface */
+.about-cta {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.08);
+  margin-top: var(--space-12);
+}
+
+.about-cta:hover {
+  background: var(--color-sand);
+  color: #111111 !important;
+  border-color: var(--color-sand);
+  box-shadow: 0 8px 28px rgba(206, 190, 175, 0.28);
+  transform: translateY(-2px);
+}
+
+/* Collection CTA: deep dark fill, pure white text for max contrast */
+.collection-cta {
+  color: #ffffff !important;
+  border-color: var(--color-black);
+  background: var(--color-black);
+  margin-top: var(--space-12);
+  text-shadow: none;
+}
+
+.collection-cta:hover {
+  background: var(--color-mocha);
+  border-color: var(--color-mocha);
+  color: #ffffff !important;
+  box-shadow: 0 8px 28px rgba(103, 72, 51, 0.38);
+  transform: translateY(-2px);
+}
+
+/* Fallback editorial-link (kept for legacy) */
+.editorial-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-12);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid currentColor;
+  transition: var(--transition-fast);
+  width: fit-content;
+}
+
+.editorial-link .arrow-icon {
+  transition: transform 0.3s var(--ease-editorial);
+}
+
+.editorial-link:hover .arrow-icon {
+  transform: translateX(6px);
+}
+
+/* --------------------------------------------------------------------------
+   3. REVEAL ON SCROLL ANIMATIONS
+   -------------------------------------------------------------------------- */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.95s var(--ease-editorial), transform 0.95s var(--ease-editorial);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-card {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s var(--ease-editorial), transform 0.9s var(--ease-editorial);
+  will-change: opacity, transform;
+}
+
+.reveal-card.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* --------------------------------------------------------------------------
+   4. CONTAINER & SECTIONS
+   -------------------------------------------------------------------------- */
+.container {
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-pad-desktop);
+  padding-right: var(--container-pad-desktop);
+  width: 100%;
+}
+
+.section {
+  padding-top: clamp(80px, 8vw, var(--space-120));
+  padding-bottom: clamp(80px, 8vw, var(--space-120));
+}
+
+/* --------------------------------------------------------------------------
+   5. HERO SECTION (100% DA TELA / 100VH — PARALLAX BACKGROUND img_hero.png)
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  min-height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
+  background-color: var(--color-black-deep);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Parallax Layer — background-image (reliable on all devices) */
+.hero-parallax-wrapper {
+  position: absolute;
+  inset: -8% 0;            /* vertical overscan for parallax travel room */
+  z-index: 1;
+  pointer-events: none;
+  background-image: url('assets/images/img_hero.png');
+  background-size: cover;
+  background-position: 82% center;
+  background-repeat: no-repeat;
+  /* NO transform here — transform + background-position animation conflict on mobile */
+}
+
+/* Remove old img styles (img no longer exists in hero) */
+.hero-bg-img {
+  display: none;
+}
+
+/* Gradient Overlay: ensures text legibility on left while showcasing model on right */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(90deg, rgba(8, 8, 8, 0.90) 0%, rgba(8, 8, 8, 0.78) 38%, rgba(8, 8, 8, 0.35) 65%, rgba(8, 8, 8, 0.15) 85%, rgba(8, 8, 8, 0.45) 100%),
+    linear-gradient(180deg, rgba(8, 8, 8, 0.35) 0%, transparent 40%, rgba(8, 8, 8, 0.8) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-side-nav {
+  position: absolute;
+  left: clamp(12px, 1.8vw, 24px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-20);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hero-counter {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.hero-dots {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.hero-dots .dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.25);
+  transition: var(--transition-fast);
+}
+
+.hero-dots .dot.active {
+  background-color: var(--color-white);
+  height: 12px;
+  border-radius: 2px;
+}
+
+.hero-container {
+  position: relative;
+  z-index: 5;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: clamp(24px, 4.5vw, 64px);
+  padding-right: clamp(24px, 4.5vw, 64px);
+  display: flex;
+  align-items: center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 660px;
+  padding: var(--space-24) 0;
+}
+
+.hero-brand-wrap {
+  margin-bottom: clamp(16px, 2.5vh, var(--space-24));
+  max-width: clamp(280px, 32vw, 440px);
+}
+
+.hero-brand-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-main-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 5.2vw, 70px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--color-white);
+  margin-bottom: clamp(16px, 2vh, var(--space-24));
+}
+
+.hero-subtext {
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.4vw, 21px);
+  font-weight: 300;
+  line-height: 1.52;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 600px;
+  margin-bottom: clamp(28px, 4vh, var(--space-40));
+}
+
+.hero-cta {
+  color: var(--color-white);
+  border-bottom-color: rgba(255, 255, 255, 0.45);
+  font-size: 15px;
+}
+
+.hero-cta:hover {
+  border-bottom-color: var(--color-white);
+}
+
+/* --------------------------------------------------------------------------
+   6. PILARES DA MARCA / CONCEITO (4 CARDS INSTITUCIONAIS)
+   -------------------------------------------------------------------------- */
+.concept-section {
+  background-color: var(--color-cream-bg);
+}
+
+.section-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: clamp(40px, 5vw, var(--space-64));
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.2vw, 54px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--color-text-main);
+}
+
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 2.5vw, var(--space-32));
+}
+
+.concept-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.concept-card .card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--color-cream-card);
+  margin-bottom: var(--space-20);
+}
+
+.concept-card .card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-editorial);
+}
+
+.concept-card:hover .card-media img {
+  transform: scale(1.04);
+}
+
+.concept-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.concept-card-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-main);
+}
+
+.concept-card-desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   7. SOBRE A MARCA & RAQUEL GUZZI (SPLIT MEIO A MEIO 50/50 - 100% DA TELA)
+   -------------------------------------------------------------------------- */
+.about-section {
+  padding: 0;
+  background-color: var(--color-dark-surface);
+  color: var(--color-white);
+  width: 100%;
+  overflow: hidden;
+}
+
+.about-split-container {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+.about-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+.about-split-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transition: transform 1.2s var(--ease-editorial);
+}
+
+.about-media:hover .about-split-img {
+  transform: scale(1.03);
+}
+
+.about-content-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(60px, 8vw, var(--space-120)) clamp(40px, 6vw, var(--space-96));
+  background-color: var(--color-dark-surface);
+}
+
+.about-content {
+  max-width: 560px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.about-headline {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.4vw, 56px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  margin-bottom: var(--space-8);
+}
+
+.about-description {
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.3vw, 20px);
+  line-height: 1.52;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.about-quote-box {
+  margin-top: var(--space-8);
+  padding-left: var(--space-24);
+  border-left: 1.5px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.about-quote {
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.3vw, 20px);
+  font-style: italic;
+  line-height: 1.50;
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.quote-author {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.about-cta {
+  color: var(--color-white);
+  border-bottom-color: rgba(255, 255, 255, 0.45);
+  margin-top: var(--space-12);
+  font-size: 15px;
+}
+
+.about-cta:hover {
+  border-bottom-color: var(--color-white);
+}
+
+/* --------------------------------------------------------------------------
+   8. A EXPERIÊNCIA DA CURADORIA (EDITORIAL BAG SERVICE)
+   -------------------------------------------------------------------------- */
+.collection-section {
+  background-color: var(--color-cream-bg);
+}
+
+.collection-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: clamp(48px, 6vw, var(--space-96));
+  align-items: center;
+}
+
+.collection-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+  max-width: 520px;
+}
+
+.collection-title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.4vw, 54px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--color-text-main);
+}
+
+.collection-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.48;
+  color: var(--color-text-main);
+}
+
+.collection-detail {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.50;
+  color: var(--color-text-muted);
+}
+
+.collection-cta {
+  color: var(--color-text-main);
+  border-bottom-color: var(--color-text-main);
+  margin-top: var(--space-12);
+  font-size: 15px;
+}
+
+/* Interactive Lookbook Expanding Accordion Panes */
+.interactive-lookbook {
+  display: flex;
+  gap: clamp(10px, 1.2vw, 16px);
+  height: clamp(520px, 64vh, 600px);
+  width: 100%;
+}
+
+.lookbook-item {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--color-cream-card);
+  transition: flex 0.7s var(--ease-editorial), opacity 0.45s ease, filter 0.45s ease;
+  will-change: flex;
+}
+
+.lookbook-item.is-active {
+  flex: 3.2;
+}
+
+.interactive-lookbook:hover .lookbook-item:not(:hover) {
+  opacity: 0.72;
+  filter: grayscale(20%);
+}
+
+.interactive-lookbook:hover .lookbook-item:hover {
+  opacity: 1;
+  filter: none;
+}
+
+.lookbook-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.lookbook-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease-editorial);
+}
+
+.lookbook-item:hover .lookbook-media img,
+.lookbook-item.is-active .lookbook-media img {
+  transform: scale(1.06);
+}
+
+/* Gradient Overlay */
+.lookbook-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 12, 12, 0.15) 0%, transparent 40%, rgba(10, 10, 10, 0.88) 100%);
+  opacity: 0.65;
+  transition: opacity 0.5s var(--ease-editorial);
+  pointer-events: none;
+}
+
+.lookbook-item.is-active .lookbook-overlay,
+.lookbook-item:hover .lookbook-overlay {
+  opacity: 0.92;
+}
+
+/* Bottom Content Details */
+.lookbook-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(16px, 2.5vw, 28px);
+  z-index: 3;
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s var(--ease-editorial), transform 0.5s var(--ease-editorial);
+  pointer-events: none;
+}
+
+.lookbook-item.is-active .lookbook-info {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.12s;
+}
+
+.lookbook-color-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.90);
+  background: rgba(255, 255, 255, 0.14);
+  padding: 4px 10px;
+  border-radius: 12px;
+  width: fit-content;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  margin-bottom: 2px;
+}
+
+.color-swatch-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.lookbook-title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.lookbook-desc {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   9. FOOTER SIMPLES (APENAS LOGO E DIREITOS)
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background-color: var(--color-black-deep);
+  color: var(--color-white);
+  padding: clamp(56px, 7vw, var(--space-80)) 0;
+  border-top: 1px solid var(--color-border-dark);
+}
+
+.footer-simple-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-20);
+}
+
+.footer-brand-logo-wrap {
+  width: clamp(84px, 8.5vw, 108px);
+  margin-bottom: var(--space-8);
+}
+
+.footer-brand-logo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.copyright {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.48);
+}
+
+/* --------------------------------------------------------------------------
+   10. CONCEPT CARDS CAROUSEL (Infinite Draggable Marquee)
+   -------------------------------------------------------------------------- */
+.carousel-viewport {
+  width: 100%;
+  position: relative;
+}
+
+.concept-carousel-track {
+  /* desktop: inherits concept-grid grid layout — no change */
+}
+
+/* --------------------------------------------------------------------------
+   11. RESPONSIVE BREAKPOINTS (MULTI-DEVICE FLUIDITY)
+   -------------------------------------------------------------------------- */
+
+/* Large Tablet & Small Laptop (1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding-left: var(--container-pad-tablet);
+    padding-right: var(--container-pad-tablet);
+  }
+
+  .hero-container {
+    padding-left: clamp(24px, 4vw, 48px);
+    padding-right: clamp(24px, 4vw, 48px);
+  }
+
+  .hero-brand-wrap {
+    max-width: 320px;
+  }
+
+  .hero-main-title {
+    font-size: clamp(40px, 4.8vw, 54px);
+  }
+
+  .concept-grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--space-32);
+    column-gap: var(--space-24);
+  }
+
+  .collection-layout {
+    grid-template-columns: 1fr;
+    gap: clamp(36px, 5vw, var(--space-48));
+  }
+
+  .collection-info {
+    max-width: 100%;
+  }
+
+  .interactive-lookbook {
+    height: 480px;
+  }
+}
+
+/* Tablet (900px) */
+@media (max-width: 900px) {
+  .about-split-container {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .about-media {
+    position: relative;
+    height: clamp(460px, 62vh, 580px);
+    min-height: 400px;
+    overflow: hidden;
+  }
+
+  .about-split-img {
+    object-position: center 20%;
+    top: -10%;
+    height: 120%;
+  }
+
+  .about-content-wrap {
+    padding: clamp(48px, 7vw, var(--space-80)) var(--container-pad-tablet);
+  }
+
+  .about-content {
+    max-width: 100%;
+  }
+}
+
+/* Mobile Landscape & Medium Tablet (768px) */
+@media (max-width: 768px) {
+  .section {
+    padding-top: clamp(64px, 9vw, 88px);
+    padding-bottom: clamp(64px, 9vw, 88px);
+  }
+
+  .hero-section {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: clamp(100px, 15vh, 130px) 0 clamp(64px, 8vh, 80px) 0;
+  }
+
+  .hero-side-nav {
+    display: none;
+  }
+
+  .hero-container {
+    padding-left: var(--container-pad-tablet);
+    padding-right: var(--container-pad-tablet);
+  }
+
+  .hero-content {
+    max-width: 100%;
+    align-items: flex-start;
+    text-align: left;
+    padding: 0;
+  }
+
+  .hero-brand-wrap {
+    max-width: 250px;
+    margin-bottom: var(--space-20);
+  }
+
+  .hero-main-title {
+    font-size: clamp(38px, 7.5vw, 48px);
+    line-height: 1.10;
+    margin-bottom: var(--space-16);
+  }
+
+  .hero-subtext {
+    font-size: 15px;
+    line-height: 1.48;
+    max-width: 100%;
+    margin-bottom: var(--space-32);
+  }
+
+  .hero-parallax-wrapper {
+    background-position: 65% center;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(180deg, rgba(8,8,8,0.30) 0%, rgba(8,8,8,0.60) 38%, rgba(8,8,8,0.94) 100%),
+      linear-gradient(90deg, rgba(8,8,8,0.65) 0%, rgba(8,8,8,0.10) 55%, transparent 100%);
+  }
+
+
+
+  .interactive-lookbook {
+    height: 420px;
+    gap: 8px;
+  }
+
+  .lookbook-title {
+    font-size: 18px;
+    white-space: normal;
+  }
+
+  .lookbook-desc {
+    display: none;
+  }
+
+  /* Pilares da Marca — Infinite Draggable Carousel (<= 768px) */
+  .concept-section .container {
+    padding-left: 0;
+    padding-right: 0;
+    overflow: visible;
+  }
+
+  .concept-section .section-top-bar {
+    padding-left: var(--container-pad-tablet);
+    padding-right: var(--container-pad-tablet);
+  }
+
+  .carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+  }
+
+  .carousel-viewport:active {
+    cursor: grabbing;
+  }
+
+  .concept-grid {
+    display: flex;
+    grid-template-columns: unset;
+    flex-wrap: nowrap;
+    gap: 16px;
+    padding-left: var(--container-pad-tablet);
+    padding-right: var(--container-pad-tablet);
+    will-change: transform;
+  }
+
+  .concept-card {
+    width: 250px;
+    min-width: 250px;
+    flex-shrink: 0;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .concept-card .card-media {
+    aspect-ratio: 3 / 4;
+    margin-bottom: 14px;
+    pointer-events: none;
+  }
+
+  .concept-card img {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .concept-card-title {
+    font-size: 14px;
+  }
+
+  .concept-card-desc {
+    font-size: 13px;
+    line-height: 1.42;
+  }
+}
+
+/* Mobile Portrait (540px and below) */
+@media (max-width: 540px) {
+  :root {
+    --container-pad-mobile: 20px;
+  }
+
+  .container {
+    padding-left: var(--container-pad-mobile);
+    padding-right: var(--container-pad-mobile);
+  }
+
+  .section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .section-title {
+    font-size: clamp(26px, 7.2vw, 32px);
+    letter-spacing: -0.02em;
+    line-height: 1.18;
+  }
+
+  /* Hero Mobile */
+  .hero-section {
+    padding: clamp(100px, 16vh, 130px) 0 clamp(56px, 8vh, 72px) 0;
+  }
+
+  .hero-container {
+    padding-left: var(--container-pad-mobile);
+    padding-right: var(--container-pad-mobile);
+  }
+
+  .hero-brand-wrap {
+    max-width: 220px;
+    margin-bottom: 18px;
+  }
+
+  .hero-main-title {
+    font-size: clamp(30px, 8.5vw, 38px);
+    line-height: 1.10;
+    margin-bottom: 14px;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-subtext {
+    font-size: 13px;
+    line-height: 1.48;
+    margin-bottom: 24px;
+    opacity: 0.88;
+  }
+
+  .btn-pill {
+    font-size: 11.5px;
+    padding: 12px 20px;
+    letter-spacing: 0.16em;
+    border-radius: 7px;
+  }
+
+  .hero-parallax-wrapper {
+    background-position: 65% center;
+  }
+
+  /* Pilares da Marca Mobile Specific Adjustments */
+  .concept-section .section-top-bar {
+    padding-left: var(--container-pad-mobile);
+    padding-right: var(--container-pad-mobile);
+  }
+
+  .concept-grid {
+    gap: 14px;
+    padding-left: var(--container-pad-mobile);
+    padding-right: var(--container-pad-mobile);
+  }
+
+  .concept-card {
+    width: clamp(220px, 68vw, 240px);
+    min-width: clamp(220px, 68vw, 240px);
+  }
+
+  .concept-card-desc {
+    font-size: 12.5px;
+    line-height: 1.40;
+  }
+
+  /* Sobre a Marca Mobile */
+  .about-media {
+    position: relative;
+    height: clamp(420px, 58vw, 520px);
+    min-height: 380px;
+    overflow: hidden;
+  }
+
+  .about-split-img {
+    top: -10%;
+    height: 120%;
+    object-position: center 20%;
+  }
+
+  .about-content-wrap {
+    padding: 44px var(--container-pad-mobile);
+  }
+
+  .about-headline {
+    font-size: clamp(26px, 7vw, 32px);
+    line-height: 1.15;
+    margin-bottom: 6px;
+    letter-spacing: -0.025em;
+  }
+
+  .about-description {
+    font-size: 13px;
+    line-height: 1.48;
+  }
+
+  .about-quote-box {
+    padding-left: 16px;
+    margin-top: 8px;
+    border-left-width: 2px;
+  }
+
+  .about-quote {
+    font-size: 13px;
+    line-height: 1.46;
+    font-style: italic;
+  }
+
+  .quote-author {
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+  }
+
+  /* Curadoria Individual Mobile */
+  .collection-title {
+    font-size: clamp(26px, 7vw, 32px);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  .collection-subtitle {
+    font-size: 13.5px;
+    line-height: 1.46;
+  }
+
+  .collection-detail {
+    font-size: 12.5px;
+    line-height: 1.46;
+  }
+
+  /* Lookbook Accordion Mobile: Sleek Tap-to-Expand Vertical Cards */
+  .interactive-lookbook {
+    flex-direction: column;
+    height: auto;
+    gap: 12px;
+  }
+
+  .lookbook-item {
+    height: 80px;
+    flex: none !important;
+    border-radius: 4px;
+    transition: height 0.55s var(--ease-editorial), opacity 0.35s ease;
+  }
+
+  .lookbook-item.is-active {
+    height: 360px;
+  }
+
+  /* Collapsed mobile card strip */
+  .lookbook-item:not(.is-active) .lookbook-info {
+    opacity: 1;
+    transform: translateY(-50%);
+    top: 50%;
+    bottom: auto;
+    left: 20px;
+    right: 20px;
+    padding: 0;
+    pointer-events: none;
+  }
+
+  .lookbook-item:not(.is-active) .lookbook-color-tag,
+  .lookbook-item:not(.is-active) .lookbook-desc {
+    display: none;
+  }
+
+  .lookbook-item:not(.is-active) .lookbook-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-white);
+    white-space: normal;
+  }
+
+  /* Expanded mobile card */
+  .lookbook-item.is-active {
+    height: clamp(380px, 55vh, 440px);
+  }
+
+  .lookbook-item.is-active .lookbook-info {
+    opacity: 1;
+    transform: translateY(0);
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+  }
+
+  .lookbook-item.is-active .lookbook-color-tag {
+    display: inline-flex;
+    margin-bottom: 6px;
+    font-size: 11px;
+  }
+
+  .lookbook-item.is-active .lookbook-title {
+    font-size: clamp(20px, 5.5vw, 24px);
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  .lookbook-item.is-active .lookbook-desc {
+    display: block;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Footer Mobile */
+  .site-footer {
+    padding: 44px var(--container-pad-mobile);
+  }
+
+  .footer-brand-logo-wrap {
+    width: 76px;
+  }
+
+  .copyright {
+    font-size: 11px;
+    line-height: 1.6;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* Very Small Mobile (<= 360px) */
+@media (max-width: 360px) {
+  .hero-main-title {
+    font-size: 30px;
+  }
+
+  .section-title,
+  .about-headline,
+  .collection-title {
+    font-size: 26px;
+  }
+
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. FLOATING WHATSAPP BUTTON (FAB)
+   -------------------------------------------------------------------------- */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45), 0 2px 8px rgba(0,0,0,0.18);
+  text-decoration: none;
+  transition: transform 0.3s var(--ease-editorial), box-shadow 0.3s var(--ease-editorial);
+  cursor: pointer;
+}
+
+.whatsapp-fab:hover {
+  transform: scale(1.10) translateY(-3px);
+  box-shadow: 0 12px 36px rgba(37, 211, 102, 0.55), 0 4px 16px rgba(0,0,0,0.22);
+}
+
+.whatsapp-fab:hover .whatsapp-fab-tooltip {
+  opacity: 1;
+  transform: translateX(0) translateY(-50%);
+  pointer-events: none;
+}
+
+/* Pulsing ring */
+.whatsapp-fab-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.35);
+  animation: waPulse 2.4s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes waPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.whatsapp-fab-icon {
+  position: relative;
+  z-index: 2;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Tooltip */
+.whatsapp-fab-tooltip {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateX(6px) translateY(-50%);
+  background: #141414;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  padding: 7px 14px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s var(--ease-editorial);
+}
+
+.whatsapp-fab-tooltip::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: #141414;
+}
+
+/* Mobile: smaller FAB, no tooltip */
+@media (max-width: 540px) {
+  .whatsapp-fab {
+    width: 52px;
+    height: 52px;
+    bottom: 20px;
+    right: 18px;
+  }
+
+  .whatsapp-fab-tooltip {
+    display: none;
+}
